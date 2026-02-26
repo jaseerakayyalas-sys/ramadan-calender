@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>റമദാൻ പ്രെയർ ടൈംസ്</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #1a1a2e; 
+            color: #ffffff; 
+            text-align: center; 
+            padding: 20px; 
+            margin: 0;
+        }
+        .container { 
+            max-width: 400px; 
+            margin: 0 auto; 
+            background: #16213e; 
+            padding: 30px; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5); 
+        }
+        h1 { color: #e94560; font-size: 24px; }
+        
+        .search-box {
+            position: relative;
+            display: flex;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            color: #000;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #e94560;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        button:hover { background-color: #d1304b; }
+
+        .suggestions-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 80px; 
+            background: #1a2a4a;
+            border-radius: 5px;
+            list-style: none;
+            padding: 0;
+            margin: 5px 0 0 0;
+            max-height: 200px;
+            overflow-y: auto;
+            text-align: left;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            display: none;
+        }
+        .suggestions-list li {
+            padding: 10px;
+            border-bottom: 1px solid #0f3460;
+            cursor: pointer;
+            font-size: 13px;
+            color: #e0e0e0;
+        }
+        .suggestions-list li:hover {
+            background: #e94560;
+            color: white;
+        }
+
+        .time-box { 
+            display: flex; 
+            justify-content: space-between; 
+            background: #0f3460; 
+            padding: 15px; 
+            margin: 10px 0; 
+            border-radius: 8px; 
+            font-size: 1.1em; 
+            font-weight: bold;
+        }
+        .highlight {
+            border-left: 5px solid #e94560;
+            background: #1a2a4a;
+        }
+        #location-msg { margin-bottom: 20px; font-style: italic; color: #a9bccc; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🌙 ഇന്നത്തെ സമയവിവരങ്ങൾ</h1>
+        
+        <div class="search-box">
+            <input type="text" id="cityInput" placeholder="സ്ഥലം ടൈപ്പ് ചെയ്യുക..." onkeyup="getSuggestions()">
+            <button onclick="fetchByAddress()">തിരയുക</button>
+            <ul id="suggestions" class="suggestions-list"></ul>
+        </div>
+
+        <p id="location-msg">ലൊക്കേഷൻ പരിശോധിക്കുന്നു...</p>
+
+        <div id="prayer-times" style="display: none;">
+            <div class="time-box"><span>ഫജർ (Fajr):</span> <span id="fajr">--:--</span></div>
+            <div class="time-box"><span>ളുഹർ (Dhuhr):</span> <span id="dhuhr">--:--</span></div>
+            <div class="time-box"><span>അസർ (Asr):</span> <span id="asr">--:--</span></div>
+            <div class="time-box highlight"><span>മഗ്‌രിബ് (Iftar):</span> <span id="maghrib">--:--</span></div>
+            <div class="time-box"><span>ഇഷാ (Isha):</span> <span id="isha">--:--</span></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+        
